@@ -17,3 +17,6 @@ Application created for learn java framework.
 * jscript
 3. Database
 * Postgress
+4. Others
+* Maven
+* Git
