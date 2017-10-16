@@ -1,11 +1,13 @@
 # personal-project
 Application created for learn java framework.
 ## Application description
-> Simple app to store notes and free minds
+> Simple app for repository to all kind files.
 ## App Features
 * Connection from web browser
-* Create category note
+* Create category 
 * Create rich text note
+* Add, edit and delete file from repo
+* Search file by name
 ## Using framework
 1. Server side
 * Jboss
