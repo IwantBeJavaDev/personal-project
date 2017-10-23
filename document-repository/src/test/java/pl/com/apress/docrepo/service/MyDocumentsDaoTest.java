@@ -20,7 +20,7 @@ public class MyDocumentsDaoTest {
 
 	@Before
 	public void setup() {
-		context = new ClassPathXmlApplicationContext("mydocumentsDao-context.xml");
+		context = new ClassPathXmlApplicationContext("mydocumentsAnnotated-context.xml");
 		engine = context.getBean(SearchEngine.class);
 		documentType = context.getBean("webType", Type.class);
 	}
