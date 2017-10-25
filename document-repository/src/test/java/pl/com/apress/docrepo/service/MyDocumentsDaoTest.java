@@ -12,34 +12,47 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import pl.com.apress.docrepo.model.Document;
 import pl.com.apress.docrepo.model.Type;
+import pl.com.apress.docrepo.spring.config.ServiceSearchEngine;
 
 public class MyDocumentsDaoTest {
 	private ClassPathXmlApplicationContext context;
-	private SearchEngine engine;
-	private Type documentType;
+	private ServiceSearchEngine engine;
+	private Type webType;
 
 	@Before
 	public void setup() {
-		context = new ClassPathXmlApplicationContext("mydocumentsAnnotated-context.xml");
-		engine = context.getBean(SearchEngine.class);
-		documentType = context.getBean("webType", Type.class);
+		context = new ClassPathXmlApplicationContext("mydocumentsDao-context.xml");
+		engine = context.getBean(ServiceSearchEngine.class);
+		webType = context.getBean("webType", Type.class);
 	}
 
 	@Test
 	public void testFindByType() {
 
-		List<Document> documents = engine.findByType(documentType);
+		List<Document> documents = engine.findByType(webType);
 
 		assertNotNull(documents);
 		assertTrue(documents.size() == 1);
-		assertEquals(documentType.getName(), documents.get(0).getType().getName());
-		assertEquals(documentType.getDesc(), documents.get(0).getType().getDesc());
-		assertEquals(documentType.getExtension(), documents.get(0).getType().getExtension());
+		assertEquals(webType.getName(), documents.get(0).getType().getName());
+		assertEquals(webType.getDesc(), documents.get(0).getType().getDesc());
+		assertEquals(webType.getExtension(), documents.get(0).getType().getExtension());
 	}
 
 	@Test
 	public void testListAll() {
-		List<Document> documents = engine.listAll();
+		engine = context.getBean(ServiceSearchEngine.class);
+		webType = context.getBean("webType", Type.class);
+		List<Document> documents = engine.findByType(webType);
+
+		assertNotNull(documents);
+		assertTrue(documents.size() == 1);
+		assertEquals(webType.getName(), documents.get(0).getType().getName());
+		assertEquals(webType.getDesc(), documents.get(0).getType().getDesc());
+		assertEquals(webType.getExtension(), documents.get(0).getType().getExtension());
+
+		engine = context.getBean(ServiceSearchEngine.class);
+		documents = engine.listAll();
+
 		assertNotNull(documents);
 		assertTrue(documents.size() == 4);
 	}
